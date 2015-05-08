@@ -1,4 +1,6 @@
-DROP TABLE IF EXISTS movies,projections,reservations;
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS projections;
+DROP TABLE IF EXISTS reservations;
 
 CREATE TABLE IF NOT EXISTS movies(
     id INTEGER PRIMARY KEY, name TEXT, raiting FLOAT )
