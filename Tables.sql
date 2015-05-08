@@ -18,13 +18,13 @@ CREATE TABLE IF NOT EXISTS projections(id PRIMARY KEY
        FOREIGN KEY (movie_id) REFERENCES movies(id)
        );
 
-INSERT INTO projections(type,date,time)
-    VALUES ("2D","2014-04-01","19:10"),
-    ("3DX","2015-01-02","22:30"),
-    ("3D","2013-07-12","13:12"),
-    ("2D","2015-03-21","10:10"),
-    ("3DX","2015-07-11","20:00"),
-     ("4D","2015-08-28","21:45:00");
+INSERT INTO projections(movie_id,type,date,time)
+    VALUES (1,"2D","2014-04-01","19:10"),
+    (2,"3DX","2015-01-02","22:30"),
+    (3,"3D","2013-07-12","13:12"),
+    (4,"2D","2015-03-21","10:10"),
+    (2,"3DX","2015-07-11","20:00"),
+     (3,"4D","2015-08-28","21:45:00");
 
 CREATE TABLE IF NOT EXISTS reservations (id INTEGER PRIMARY KEY,
     username TEXT,
