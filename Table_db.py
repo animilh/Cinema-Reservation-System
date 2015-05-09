@@ -6,3 +6,4 @@ cursor = conn.cursor()
 
 with open(SQL_FILE, "r") as f:
     cursor.executescript(f.read())
+    conn.commit()
