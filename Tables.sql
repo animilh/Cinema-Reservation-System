@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS movies;
 
 CREATE TABLE movies(
-    id INTEGER PRIMARY KEY, name TEXT, raiting FLOAT
+    id INTEGER PRIMARY KEY, name TEXT, rating FLOAT
 );
 
-INSERT INTO movies(name, raiting)
+INSERT INTO movies(name, rating)
     VALUES ("The Godfather",9.8),
     ("Firm",6.7),
     ("Limitless",8.9),
@@ -12,13 +12,12 @@ INSERT INTO movies(name, raiting)
 
 DROP TABLE IF EXISTS projections;
 
-CREATE TABLE projections(id PRIMARY KEY
-    ,movie_id INTEGER ,
-     type TEXT,
-      date DATE,
-       time TIME,
-       FOREIGN KEY (movie_id) REFERENCES movies(id)
-       );
+CREATE TABLE projections(id INTEGER PRIMARY KEY,
+    movie_id INTEGER,
+    type TEXT,
+    date DATE,
+    time TIME,
+    FOREIGN KEY (movie_id) REFERENCES movies(id));
 
 INSERT INTO projections(movie_id,type,date,time)
     VALUES (1,"2D","2014-04-01","19:10"),
