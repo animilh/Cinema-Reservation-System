@@ -4,7 +4,6 @@ from settings import DB_NAME
 
 connection = sqlite3.connect(DB_NAME)
 connection.row_factory = sqlite3.Row
-cursor = connection.cursor()
 
 spells = [
     'show_movies',
@@ -14,7 +13,6 @@ spells = [
     'exit',
     'help'
 ]
-
 
 print('Welcome to Magic Cinema Reservation System')
 
@@ -31,7 +29,7 @@ while True:
         continue
 
     if choice == 'show_movies':
-        movies = Movie.get_movies(connection)
+        movies = Movie.show_movies(connection)
         print("Current movies:")
         for movie in movies:
             print('[{}] - {} ({})'.format(movie[0], movie[1], movie[2]))
@@ -39,6 +37,8 @@ while True:
 
     if choice == 'show_movie_projections':
         id_movie = input('id movie>')
+        movie_name = Movie.get_movie(connection, id_movie)
+        print("Projections for movie '{}':".format(movie_name['name']))
         projections = Movie.get_movie_projections(connection, id_movie)
         for proj in projections:
             print('[{}] - {} {} ({})'.format(proj[0], proj[1], proj[2], proj[3]))
@@ -50,14 +50,10 @@ while True:
 
     if str(choice) == 'cancel_reservation':
         name = input('name>')
+        Movie.cancel_reservation(connection, name)
+        #unmark the seats from the kinosalon
+        print("The reservation of {} has been canceled.".format(name))
 
-
-
-
-# if choice == 'make_reservation':
-#     Movie.make_reservation()
-
-# if choice == 'cancel_reservation':
-#     Movie.cancel_reservation()
-
-
+    if str(choice) == 'make_reservation':
+        username = input("Step 1 (User): Choose name>")
+        number_of_tickets = input("Step 1 (User): Choose number of tickets>")
