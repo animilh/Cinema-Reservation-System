@@ -48,9 +48,3 @@ class Map:
         self.map[row][col * 2] = "X"
         return True
 
-#a = Map("kinosalon.txt")
-# print(a.is_available(3,4))
-# a.choose_seat(2,3)
-# a.print_map()
-# print(a.is_available(2,3))
-# print(a.count_available_seats())
