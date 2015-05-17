@@ -154,7 +154,7 @@ def start():
 
             while int(id_projection_if) not in id_projections_list:
                 print("Doesn't exist such a projection_id.Try again")
-                id_projection = input(
+                id_projection_if = input(
                     "Step 3 (Projection): Choose a projection>")
             already_reserved(id_projection_if)
             cn.print_map()
@@ -169,11 +169,11 @@ def start():
             insert_reservation(
                 username, id_projection_if, choose_seat()[0], choose_seat()[1])
 
-            # print("Your resevation:")
-            # print("Movie:")
-            # get_name_and_raiting(id_projection_if)
-            # print("Projection")
-            # get_movie_projections(id_projection_if)
+            print("Your resevation:")
+            print("Movie:")
+            str(get_name_and_raiting(id_projection_if))
+            print("Projection")
+            str(get_movie_projections(id_projection_if))
 
             final = str(input("Step 5 (Confirm - type 'finalize')>"))
             if final == 'finalize':
