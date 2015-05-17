@@ -56,15 +56,16 @@ def get_row_and_col(username):
 def choose_seat():
     choice_row = int(input("Step 4 (Seats): Choose seat's row>"))
     choice_col = int(input("Step 4 (Seats): Choose seat's col>"))
-    if cn.is_available(choice_row, choice_col) is False:
-        print("This seat is already taken")
-    if cn.choose_seat(choice_row, choice_col) is False:
-        print("You chose invalid seat.")
+    if not cn.is_in_map(choice_row, choice_col):
+        print("You have chosen invalid seats.")
+        return
+    if not cn.is_available(choice_row, choice_col):
+        print("This seats are already taken")
+        return
 
     cn.choose_seat(choice_row, choice_col)
     cn.print_map()
-    result = (choice_row, choice_col)
-    return result
+    return (choice_row, choice_col)
 
 
 def give_up():
@@ -122,7 +123,8 @@ def start():
             continue
 
         if str(choice) == 'make_reservation':
-            print("If you want to quit the reservation portal during any of the registration steps type 'exit'")
+            print(
+                "If you want to quit the reservation portal during any of the registration steps type 'exit'")
             username = input("Step 1 (User): Choose name>")
             if username == "Exit":
                 give_up()
@@ -141,14 +143,18 @@ def start():
                 continue
             get_movie(id_movie_if)
             get_movie_projections(id_movie_if)
-            id_projection_if = input("Step 3 (Projection): Choose a projection>")
+            id_projection_if = input(
+                "Step 3 (Projection): Choose a projection>")
             if id_projection_if == "Exit":
                 give_up()
                 continue
 
-            while id_projection_if != id_movie_if:
+            projections = Movie.get_movie_projections(connection, id_movie_if)
+            id_projections_list = [proj[0] for proj in projections]
+
+            while int(id_projection_if) not in id_projections_list:
                 print("Doesn't exist such a projection_id.Try again")
-                id_projection_if = input(
+                id_projection = input(
                     "Step 3 (Projection): Choose a projection>")
             already_reserved(id_projection_if)
             cn.print_map()
@@ -160,13 +166,14 @@ def start():
             # print("Seats:")
             # print(result)
 
-            insert_reservation(username, id_projection_if, choose_seat()[0], choose_seat()[1])
+            insert_reservation(
+                username, id_projection_if, choose_seat()[0], choose_seat()[1])
 
-            print("Your resevation:")
-            print("Movie:")
-            get_name_and_raiting(id_projection_if)
-            print("Projection")
-            get_movie_projections(id_projection_if)
+            # print("Your resevation:")
+            # print("Movie:")
+            # get_name_and_raiting(id_projection_if)
+            # print("Projection")
+            # get_movie_projections(id_projection_if)
 
             final = str(input("Step 5 (Confirm - type 'finalize')>"))
             if final == 'finalize':

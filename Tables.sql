@@ -20,10 +20,12 @@ CREATE TABLE projections(id INTEGER PRIMARY KEY,
     FOREIGN KEY (movie_id) REFERENCES movies(id));
 
 INSERT INTO projections(movie_id,type,date,time)
-    VALUES (1,"2D","2014-04-01","19:10"),
+    VALUES (3,"2D","2014-04-01","19:10"),
     (2,"3DX","2015-01-02","22:30"),
-    (3,"3D","2013-07-12","13:12"),
-    (4,"2D","2015-03-21","10:10");
+    (1,"3D","2013-07-12","13:12"),
+    (4,"2D","2015-03-21","10:10"),
+    (2,"3D","2014-04-01","19:10"),
+(1,"4DX","2014-03-01","12:00");
 
 DROP TABLE IF EXISTS reservations;
 

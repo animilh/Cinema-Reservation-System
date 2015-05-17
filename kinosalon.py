@@ -1,4 +1,3 @@
-
 class Map:
 
     def __init__(self, filename):
@@ -22,6 +21,11 @@ class Map:
         if self.seats_availability[row, col * 2] == 1:
             return False
         return True
+
+    def is_in_map(self, row, col):
+        if row in range(1, 11) and col in range(1, 11):
+            return True
+        return False
 
     def choose_seat(self, row, col):
         if row > 10 or col > 10:
@@ -47,4 +51,3 @@ class Map:
         self.seats_availability[(row, col * 2)] = 1
         self.map[row][col * 2] = "X"
         return True
-
