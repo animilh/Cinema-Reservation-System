@@ -1,22 +1,23 @@
-DROP TABLE IF EXISTS movies,projections,reservations;
+DROP TABLE IF EXISTS movies;
 
-CREATE TABLE IF NOT EXISTS movies(
-    id INTEGER PRIMARY KEY, name TEXT, raiting FLOAT )
+CREATE TABLE movies(
+    id INTEGER PRIMARY KEY, name TEXT, rating FLOAT
 );
 
-INSERT INTO movies(name , raiting)
+INSERT INTO movies(name, rating)
     VALUES ("The Godfather",9.8),
     ("Firm",6.7),
     ("Limitless",8.9),
     ("Apocalypto",7.5);
 
-CREATE TABLE IF NOT EXISTS projections(id PRIMARY KEY
-    ,movie_id INTEGER ,
-     type TEXT,
-      date DATE,
-       time TIME,
-       FOREIGN KEY (movie_id) REFERENCES movies(id)
-       );
+DROP TABLE IF EXISTS projections;
+
+CREATE TABLE projections(id INTEGER PRIMARY KEY,
+    movie_id INTEGER,
+    type TEXT,
+    date DATE,
+    time TIME,
+    FOREIGN KEY (movie_id) REFERENCES movies(id));
 
 INSERT INTO projections(movie_id,type,date,time)
     VALUES (1,"2D","2014-04-01","19:10"),
@@ -26,7 +27,9 @@ INSERT INTO projections(movie_id,type,date,time)
     (2,"3DX","2015-07-11","20:00"),
      (3,"4D","2015-08-28","21:45:00");
 
-CREATE TABLE IF NOT EXISTS reservations (id INTEGER PRIMARY KEY,
+DROP TABLE IF EXISTS reservations;
+
+CREATE TABLE reservations (id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT,
     projection_id INTEGER,
     row INTEGER,
@@ -41,5 +44,3 @@ INSERT INTO reservations(username,projection_id,row,col)
     ("Ivan Ivanov",1,7,9),
     ("Lili Mihailova",4,4,7)
     ;
-
-
