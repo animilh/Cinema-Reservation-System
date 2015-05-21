@@ -43,18 +43,21 @@ class CinemaInterface:
 
 
     def choose_seat(self):
-        choice_row = int(input("Step 4 (Seats): Choose seat's row>"))
-        choice_col = int(input("Step 4 (Seats): Choose seat's col>"))
+        try:
+            choice_row = int(input("Step 4 (Seats): Choose seat's row>"))
+            choice_col = int(input("Step 4 (Seats): Choose seat's col>"))
 
-        if not cn.is_available(choice_row, choice_col):
-            print("This seats are already taken.")
-        if not cn.is_in_map(choice_row, choice_col):
-            print("You have chosen invalid seats.")
+            if not cn.is_available(choice_row, choice_col):
+                print("This seats are already taken.")
+            if not cn.is_in_map(choice_row, choice_col):
+                print("You have chosen invalid seats.")
 
-        cn.choose_seat(choice_row, choice_col)
-        cn.print_map()
+            cn.choose_seat(choice_row, choice_col)
+            cn.print_map()
 
-        return (choice_row, choice_col)
+            return (choice_row, choice_col)
+        except (ValueError, TypeError):
+            print("Bad input for row and col.")
 
 
     def give_up(self):
@@ -147,11 +150,16 @@ class CinemaInterface:
 
                 count = int(number_of_tickets)
                 while count > 0:
-                    result = self.choose_seat()
-                    if None not in (result[0], result[1]):
-                        self.insert_reservation(
-                            username, id_projection, result[0], result[1])
-                    count -= 1
+                    try:
+                        result = self.choose_seat()
+                        if None not in (result[0], result[1]):
+                            self.insert_reservation(
+                                username, id_projection, result[0], result[1])
+                        count -= 1
+                    except TypeError:
+                        print("Type valid row and col.")
+                      
+                         
 
 
                 print("Your reservation is successful")
