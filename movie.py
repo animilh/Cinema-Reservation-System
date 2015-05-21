@@ -11,15 +11,11 @@ class Movie:
         FROM movies
         WHERE id = ?
     """
-<<<<<<< HEAD
-
-=======
     GET_MOVIE_AND_RAITING = """
         SELECT name,rating
         FROM movies
         WHERE id = ?
 """
->>>>>>> ani
     SHOW_MOVIE_PROJECTIONS = """
         SELECT id, date, time, type
         FROM projections
@@ -30,26 +26,6 @@ class Movie:
         DELETE FROM reservations
         WHERE username = ?
     """
-<<<<<<< HEAD
-
-
-    @classmethod
-    def show_movies(cls, connection):
-        cursor = connection.cursor()
-        result = cursor.execute(cls.SHOW_MOVIES)
-        return result.fetchall()
-
-    @classmethod
-    def get_movie(cls, connection, movie_id):
-        cursor = connection.cursor()
-        movie_name = cursor.execute(cls.GET_MOVIE, (movie_id, ))
-        return movie_name.fetchone()
-
-    @classmethod
-    def get_movie_projections(cls, connection, movie_id):
-        cursor = connection.cursor()
-        result = cursor.execute(cls.SHOW_MOVIE_PROJECTIONS, (movie_id, ))
-=======
     GET_ROW_AND_COL = """
     SELECT row, col
     FROM reservations
@@ -115,12 +91,4 @@ class Movie:
     def already_reserved(self, projection_id):
         cursor = self.__conn.cursor()
         result = cursor.execute(Movie.GET_ALREADY_RESERVED, (projection_id, ))
->>>>>>> ani
         return result.fetchall()
-
-    @classmethod
-    def cancel_reservation(cls, connection, name):
-        cursor = connection.cursor()
-        cursor.execute(cls.CANCEL_RESERVATION, (name, ))
-        connection.commit()
-

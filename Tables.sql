@@ -29,11 +29,7 @@ INSERT INTO projections(movie_id,type,date,time)
 
 DROP TABLE IF EXISTS reservations;
 
-<<<<<<< HEAD
-CREATE TABLE reservations (id INTEGER PRIMARY KEY,
-=======
 CREATE TABLE reservations (id INTEGER PRIMARY KEY AUTOINCREMENT,
->>>>>>> ani
     username TEXT,
     projection_id INTEGER,
     row INTEGER,
@@ -47,8 +43,4 @@ INSERT INTO reservations(username,projection_id,row,col)
     ("Peter Tanev",2,2,6),
     ("Ivan Ivanov",1,7,9),
     ("Lili Mihailova",4,4,7)
-<<<<<<< HEAD
     ;
-=======
-    ;
->>>>>>> ani
